@@ -2,12 +2,6 @@
 
 int main(){
 
-	#ifdef TESTING
-	if(!test_stack()){
-		fprintf(stderr, "Stack not passed test (tested from %s line %d in %s)\n", __LOCATION__);
-	}
-	#endif
-
 	//Stack_t stack_for_testing = {};
 	//Stack_t * stack_for_testing = &stack; 
 	
@@ -412,7 +406,7 @@ bool fill_data_with_poison(Elem_t * const data, const size_t size){
 	assert(data != nullptr);
 	if(size < 0) return false;
 
-	for(unsigned int i = 0; i < STACK_INIT_SIZE; i++){// !!!!!ERRROR MANUALLY CREATED i < size
+	for(unsigned int i = 0; i < STACK_INIT_SIZE; i++){
 		data[i] = POISON;
 	}
 
