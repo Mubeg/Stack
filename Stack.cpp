@@ -259,7 +259,7 @@ bool stack_init(Stack_t *stk, const char name[], const size_t init_stack_size /*
 	
 	stk->maxsize = init_stack_size;
 
-	stk->buff = (char *) calloc(stk->maxsize*sizeof(Elem_t) + 2*sizeof(Elem_t), sizeof(char));
+	stk->buff = (char *) calloc(stk->maxsize*sizeof(Elem_t) + 2*sizeof(Canary_t), sizeof(char));
 	if(stk->buff == nullptr){
 		return false;
 	}
@@ -480,7 +480,7 @@ bool check_stack(Stack_t *stk, const char called_from_file[], int line, const ch
 	passed = check_canary(stk)                    ? passed : false;
 	if(DEBUG) printf("Passed: %d\n", passed);
 
-	passed = check_hash(stk)                      ? passed : false;
+	//passed = check_hash(stk)                      ? passed : false;
 	if(DEBUG) printf("Passed: %d\n", passed);
 
 	passed = check_size(stk)                      ? passed : false;
@@ -652,7 +652,7 @@ bool check_hash(Stack_t * const stk){
 bool check_dynamic_canaries_and_data(Stack_t * const stk){
 
 	assert(stk != nullptr);
-	assert(stk->canary_dynamic1 != stk->canary_dynamic2);
+	//assert(stk->canary_dynamic1 != stk->canary_dynamic2);
 	assert(stk->canary_dynamic1 != nullptr);
 
 	return !((char *)(stk->canary_dynamic2) - (char *)(stk->canary_dynamic1) != sizeof(Canary_t) + stk->maxsize*sizeof(Elem_t) 
